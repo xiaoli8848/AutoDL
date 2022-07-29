@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "AutoDL (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "AutoDL (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
