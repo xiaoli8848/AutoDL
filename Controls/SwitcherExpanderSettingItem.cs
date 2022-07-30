@@ -1,12 +1,18 @@
-﻿using System;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Documents;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Microsoft.UI.Xaml.Markup;
 
 namespace AutoDL.Controls
 {
-    public class SwitcherSettingItem : SettingItem
+    public sealed class SwitcherExpanderSettingItem : ExpanderSettingItem
     {
         public bool IsOn
         {
@@ -17,10 +23,10 @@ namespace AutoDL.Controls
         public static readonly DependencyProperty IsOnProperty = DependencyProperty.Register(
             nameof(IsOn),
             typeof(bool),
-            typeof(SwitcherSettingItem),
+            typeof(SwitcherExpanderSettingItem),
             new PropertyMetadata(false));
 
-        public SwitcherSettingItem()
+        public SwitcherExpanderSettingItem()
         {
             var switcher = new ToggleSwitch();
             var binding = new Binding

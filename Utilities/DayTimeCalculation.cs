@@ -1,10 +1,44 @@
 ﻿using System.Text;
 using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
+using AutoDL.Models;
 
 namespace AutoDL.Utilities;
 
 public static class DayTimeCalculation
 {
+    private static SettingsViewModel Settings => (App.Current as App).SettingsViewModel;
+    public static Geolocator _locator = new();
+
+    #region 自动更新设置项
+
+    static DayTimeCalculation()
+    {
+        _locator.AllowFallbackToConsentlessPositions();
+        if (Settings.UseSunRiseAndSunSetTime)
+        {
+            _locator.AllowFallbackToConsentlessPositions();
+            CalculateDayTime();
+        }
+
+        Settings.PropertyChanged += (_, _) =>
+        {
+            CalculateDayTime();
+        };
+    }
+
+    private static async Task CalculateDayTime()
+    {
+        if (Settings.UseSunRiseAndSunSetTime)
+        {
+            var position = await _locator.GetGeopositionAsync();
+            var dayTime = GetSunTime(DateTime.Today, position.Coordinate.Longitude, position.Coordinate.Latitude);
+            Settings.DarkTimeStart = dayTime.SunsetTime.TimeOfDay;
+            Settings.DarkTimeEnd = dayTime.SunriseTime.TimeOfDay;
+        }
+    }
+
+    #endregion
     #region 公共方法
 
     /// <summary>

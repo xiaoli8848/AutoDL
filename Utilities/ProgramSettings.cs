@@ -54,6 +54,7 @@ namespace AutoDL.Utilities
             task.AsTask().Wait();
             SetStringSetting(nameof(SettingsViewModel.DarkTimeStart), new TimeSpan(18, 0, 0).ToString());
             SetStringSetting(nameof(SettingsViewModel.DarkTimeEnd), new TimeSpan(7, 0, 0).ToString());
+            SetStringSetting(nameof(SettingsViewModel.UseSunRiseAndSunSetTime), false.ToString());
         }
     }
 }

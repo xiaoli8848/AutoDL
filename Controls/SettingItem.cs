@@ -8,24 +8,24 @@ public class SettingItem : Control
         set => SetValue(HeaderProperty, value);
     }
 
-    readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
+    public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
         nameof(Header),
         typeof(string),
         typeof(SettingItem),
         new PropertyMetadata(default(string))
         );
 
-    public SymbolIconSource Symbol
+    public IconElement Icon
     {
-        get => (SymbolIconSource)GetValue(SymbolProperty);
-        set => SetValue(SymbolProperty, value);
+        get => (IconElement)GetValue(IconProperty);
+        set => SetValue(IconProperty, value);
     }
 
-    readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
-        nameof(Symbol),
-        typeof(SymbolIconSource),
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(IconElement),
         typeof(SettingItem),
-        new PropertyMetadata(default(SymbolIconSource))
+        new PropertyMetadata(default(IconElement))
     );
 
     public string Label
@@ -34,7 +34,7 @@ public class SettingItem : Control
         set => SetValue(LabelProperty, value);
     }
 
-    readonly DependencyProperty LabelProperty = DependencyProperty.Register(
+    public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(
         nameof(Label),
         typeof(string),
         typeof(SettingItem),

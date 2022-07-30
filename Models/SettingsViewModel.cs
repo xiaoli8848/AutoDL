@@ -71,6 +71,16 @@ namespace AutoDL.Models
             }
         }
 
+        public bool UseSunRiseAndSunSetTime
+        {
+            get => Convert.ToBoolean(ProgramSettings.GetStringSetting(nameof(UseSunRiseAndSunSetTime)));
+            set
+            {
+                ProgramSettings.SetStringSetting(nameof(UseSunRiseAndSunSetTime), value.ToString());
+                OnPropertyChanged();
+            }
+        }
+
         public SettingsViewModel()
         {
             if (ProgramSettings.LocalSettings is null)

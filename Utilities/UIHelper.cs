@@ -1,5 +1,8 @@
 ﻿using System.Runtime.InteropServices;
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
 using WinRT;
+using WinRT.Interop;
 
 namespace AutoDL.Utilities;
 
@@ -8,7 +11,39 @@ public static class UIHelper
     private static WindowsSystemDispatcherQueueHelper m_wsdqHelper; // See separate sample below for implementation
     private static Microsoft.UI.Composition.SystemBackdrops.MicaController m_micaController;
     private static Microsoft.UI.Composition.SystemBackdrops.SystemBackdropConfiguration m_configurationSource;
+
     private static MainWindow MainWindow => (MainWindow) (Application.Current as App).m_window;
+    private static double _scale = GetScaleAdjustment();
+    private enum Monitor_DPI_Type : int
+    {
+        MDT_Effective_DPI = 0,
+        MDT_Angular_DPI = 1,
+        MDT_Raw_DPI = 2,
+        MDT_Default = MDT_Effective_DPI
+    }
+
+    [DllImport("Shcore.dll", SetLastError = true)]
+    private static extern int GetDpiForMonitor(IntPtr hmonitor, Monitor_DPI_Type dpiType, out uint dpiX, out uint dpiY);
+
+    public static AppWindow GetAppWindow()
+    {
+        return AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(WindowNative.GetWindowHandle(MainWindow)));
+    }
+
+    private static double GetScaleAdjustment()
+    {
+        var displayArea = DisplayArea.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(WindowNative.GetWindowHandle(MainWindow)), DisplayAreaFallback.Primary);
+        var hMonitor = Win32Interop.GetMonitorFromDisplayId(displayArea.DisplayId);
+
+        // Get DPI.
+        var result = GetDpiForMonitor(hMonitor, Monitor_DPI_Type.MDT_Default, out var dpiX, out var _);
+        if (result != 0) throw new Exception("Could not get DPI for monitor.");
+
+        var scaleFactorPercent = (uint)(((long)dpiX * 100 + (96 >> 1)) / 96);
+        return scaleFactorPercent / 100.0;
+    }
+
+    public static int GetActualPixel(double pixel) => Convert.ToInt32(pixel * _scale);
 
     public static bool TrySetMicaBackdrop()
     {
@@ -61,6 +96,8 @@ public static class UIHelper
     {
         m_configurationSource.IsInputActive = args.WindowActivationState != WindowActivationState.Deactivated;
     }
+
+
 }
 
 public class WindowsSystemDispatcherQueueHelper

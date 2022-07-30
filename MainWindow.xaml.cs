@@ -4,7 +4,9 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics;
 using Windows.UI;
+using AutoDL.Controls;
 using AutoDL.Utilities;
 using Microsoft.UI.Text;
 using WinRT;
@@ -25,6 +27,11 @@ namespace AutoDL
         {
             this.InitializeComponent();
             MainGrid.DataContext = ((App.Current) as App).SettingsViewModel;
+            this.Activated += (_, _) =>
+            {
+                UIHelper.GetAppWindow().Resize(new SizeInt32(UIHelper.GetActualPixel(700), UIHelper.GetActualPixel(800)));
+            };
+            _ = DayTimeCalculation._locator;
         }
     }
 }

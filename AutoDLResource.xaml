@@ -10,9 +10,11 @@
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Light">
             <SolidColorBrush Color="White" x:Key="SettingItemBackgroundBrush"/>
+            <SolidColorBrush Color="LightGray" x:Key="SettingItemBorderBrush"/>
         </ResourceDictionary>
         <ResourceDictionary x:Key="Dark">
             <SolidColorBrush Color="Black" x:Key="SettingItemBackgroundBrush"/>
+            <SolidColorBrush Color="Gray" x:Key="SettingItemBorderBrush"/>
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>
