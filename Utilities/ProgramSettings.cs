@@ -49,7 +49,7 @@ namespace AutoDL.Utilities
         {
             Registry.CurrentUser.OpenSubKey("Software", true).CreateSubKey("AutoDL");
             SetStringSetting(nameof(SettingsViewModel.FirstTimeToLaunch), true.ToString());
-            SetStringSetting(nameof(SettingsViewModel.SwitcherEnabled), true.ToString());
+            SetStringSetting(nameof(SettingsViewModel.SwitcherEnabled), false.ToString());
             var task = Geolocator.RequestAccessAsync();
             task.AsTask().Wait();
             SetStringSetting(nameof(SettingsViewModel.DarkTimeStart), new TimeSpan(18, 0, 0).ToString());

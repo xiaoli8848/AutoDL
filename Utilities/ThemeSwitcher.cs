@@ -39,7 +39,7 @@ namespace AutoDL.Utilities
 
                     if (GetAppColor() != ColorThemeType.Dark)
                     {
-                        SetSystemColor(ColorThemeType.Dark);
+                        SetAppColor(ColorThemeType.Dark);
                     }
                 }
             }
@@ -54,7 +54,7 @@ namespace AutoDL.Utilities
 
                     if (GetAppColor() != ColorThemeType.Dark)
                     {
-                        SetSystemColor(ColorThemeType.Dark);
+                        SetAppColor(ColorThemeType.Dark);
                     }
                 }
             }
@@ -82,17 +82,17 @@ namespace AutoDL.Utilities
 
         public static void SetAppColor(ColorThemeType type)
         {
-            Personalize.SetValue("AppsUseLightTheme", type);
+            Personalize.SetValue("AppsUseLightTheme", (int)type);
         }
         public static void SetSystemColor(ColorThemeType type)
         {
-            Personalize.SetValue("SystemUsesLightTheme", type);
+            Personalize.SetValue("SystemUsesLightTheme", (int)type);
         }
     }
 
     public enum ColorThemeType
     {
-        Light = 0x00000001,
-        Dark = 0x00000000
+        Dark = 0x00000000,
+        Light = 0x00000001
     }
 }

@@ -1,11 +1,14 @@
-﻿using Microsoft.UI.Xaml.Controls.Primitives;
+﻿using System.Drawing;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Navigation;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Windows;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics;
 using Windows.UI;
+using Windows.UI.Shell;
 using AutoDL.Controls;
 using AutoDL.Utilities;
 using Microsoft.UI.Text;
@@ -32,6 +35,7 @@ namespace AutoDL
                 UIHelper.GetAppWindow().Resize(new SizeInt32(UIHelper.GetActualPixel(700), UIHelper.GetActualPixel(800)));
             };
             _ = DayTimeCalculation._locator;
+            
         }
     }
 }

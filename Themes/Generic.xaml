@@ -7,7 +7,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:SettingItem">
-                    <Grid Height="70" Background="{ThemeResource SettingItemBackgroundBrush}" CornerRadius="6" BorderBrush="{ThemeResource SettingItemBorderBrush}" BorderThickness="0.5" x:Name="ItemGrid">
+                    <Grid Height="70" Background="{ThemeResource SystemControlForegroundAltHighBrush}" CornerRadius="6" BorderBrush="{ThemeResource SettingItemBorderBrush}" BorderThickness="0.5" x:Name="ItemGrid">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
@@ -33,9 +33,9 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:ExpanderSettingItem">
-                    <Expander Background="{ThemeResource SettingItemBackgroundBrush}" HorizontalAlignment="Stretch" BorderBrush="{ThemeResource SettingItemBorderBrush}" BorderThickness="0.5" Content="{TemplateBinding ExpanderSettingContent}">
+                    <Expander Background="{ThemeResource SystemControlForegroundAltHighBrush}" HorizontalAlignment="Stretch" BorderBrush="{ThemeResource SettingItemBorderBrush}" BorderThickness="0.5" Content="{TemplateBinding ExpanderSettingContent}">
                         <Expander.Header>
-                            <Grid Height="70" Background="{ThemeResource SettingItemBackgroundBrush}">
+                            <Grid Height="70" Background="{ThemeResource SystemControlForegroundAltHighBrush}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
                                     <RowDefinition/>
