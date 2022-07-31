@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddImageWallpaperAppBarButton.Label" xml:space="preserve">
+    <value>添加图片壁纸</value>
+  </data>
+  <data name="AddWallpaperEngineWallpaperAppBarButton.Label" xml:space="preserve">
+    <value>添加动态壁纸</value>
+  </data>
   <data name="AutoDLPivotItem.Header" xml:space="preserve">
     <value>自动化设置</value>
   </data>
@@ -125,6 +131,24 @@
   </data>
   <data name="DarkTimeStartPicker.Header" xml:space="preserve">
     <value>开始时间</value>
+  </data>
+  <data name="ImportImageWallpaperDialogCloseButtonText" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="ImportImageWallpaperDialogImportButtonText" xml:space="preserve">
+    <value>导入</value>
+  </data>
+  <data name="ImportImageWallpaperDialogTitle" xml:space="preserve">
+    <value>导入图片壁纸</value>
+  </data>
+  <data name="ImportWallpaperEngineWallpaperDialogCloseButtonText" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="ImportWallpaperEngineWallpaperDialogImportButtonText" xml:space="preserve">
+    <value>导入</value>
+  </data>
+  <data name="ImportWallpaperEngineWallpaperDialogTitle" xml:space="preserve">
+    <value>导入动态壁纸</value>
   </data>
   <data name="IsOnSwitcher.Header" xml:space="preserve">
     <value>颜色主题切换自动化</value>
@@ -135,10 +159,22 @@
   <data name="TitleTextBlock.Text" xml:space="preserve">
     <value>AutoDL</value>
   </data>
+  <data name="UseCustomWallpaperSwitcher.Header" xml:space="preserve">
+    <value>壁纸切换自动化</value>
+  </data>
+  <data name="UseCustomWallpaperSwitcher.Label" xml:space="preserve">
+    <value>开启后，将自动切换系统壁纸。</value>
+  </data>
   <data name="UseSunRiseAndSunSetTimeSwitcher.Header" xml:space="preserve">
     <value>自动设定时间</value>
   </data>
   <data name="UseSunRiseAndSunSetTimeSwitcher.Label" xml:space="preserve">
     <value>根据定位计算日出日落时间。</value>
+  </data>
+  <data name="WallpaperEndTimePicker.Header" xml:space="preserve">
+    <value>结束时间</value>
+  </data>
+  <data name="WallpaperStartTimePicker.Header" xml:space="preserve">
+    <value>开始时间</value>
   </data>
 </root>

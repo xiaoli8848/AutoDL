@@ -1,5 +1,4 @@
-﻿using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using AutoDL.Models;
 
@@ -7,8 +6,8 @@ namespace AutoDL.Utilities;
 
 public static class DayTimeCalculation
 {
-    private static SettingsViewModel Settings => (App.Current as App).SettingsViewModel;
     public static Geolocator _locator = new();
+    private static SettingsViewModel Settings => (Application.Current as App).SettingsViewModel;
 
     #region 自动更新设置项
 
@@ -21,10 +20,7 @@ public static class DayTimeCalculation
             CalculateDayTime();
         }
 
-        Settings.PropertyChanged += (_, _) =>
-        {
-            CalculateDayTime();
-        };
+        Settings.PropertyChanged += (_, _) => { CalculateDayTime(); };
     }
 
     private static async Task CalculateDayTime()
@@ -39,17 +35,18 @@ public static class DayTimeCalculation
     }
 
     #endregion
+
     #region 公共方法
 
     /// <summary>
-    /// 计算日长
+    ///     计算日长
     /// </summary>
     /// <param name="date">日期</param>
     /// <param name="longitude">经度</param>
     /// <param name="latitude">纬度</param>
     /// <returns>日长</returns>
     /// <remarks>
-    /// 注：日期最小为2000.1.1号
+    ///     注：日期最小为2000.1.1号
     /// </remarks>
     public static double GetDayLength(DateTime date, double longitude, double latitude)
     {
@@ -58,14 +55,14 @@ public static class DayTimeCalculation
     }
 
     /// <summary>
-    /// 计算日出日没时间
+    ///     计算日出日没时间
     /// </summary>
     /// <param name="date">日期</param>
     /// <param name="longitude">经度</param>
     /// <param name="latitude">纬度</param>
     /// <returns>日落日出时间</returns>
     /// <remarks>
-    /// 注：日期最小为2000.1.1号
+    ///     注：日期最小为2000.1.1号
     /// </remarks>
     public static SunTimeResult GetSunTime(DateTime date, double longitude, double latitude)
     {
@@ -212,7 +209,7 @@ public static class DayTimeCalculation
     }
 
     /// <summary>
-    /// 日出没时刻计算
+    ///     日出没时刻计算
     /// </summary>
     /// <param name="year">年</param>
     /// <param name="month">月</param>
@@ -311,8 +308,8 @@ public static class DayTimeCalculation
     #region 辅助函数
 
     /// <summary>
-    /// 历元2000.0，即以2000年第一天开端为计日起始（天文学以第一天为0日而非1日）。
-    /// 它与UT（就是世界时，格林尼治平均太阳时）1999年末重合。
+    ///     历元2000.0，即以2000年第一天开端为计日起始（天文学以第一天为0日而非1日）。
+    ///     它与UT（就是世界时，格林尼治平均太阳时）1999年末重合。
     /// </summary>
     /// <param name="y"></param>
     /// <param name="m"></param>
@@ -342,7 +339,7 @@ public static class DayTimeCalculation
     }
 
 
-    private static double Inv360 = 1.0 / 360.0;
+    private static readonly double Inv360 = 1.0 / 360.0;
 
     #endregion
 
@@ -368,8 +365,8 @@ public static class DayTimeCalculation
         return Radge * Math.Atan2(y, x);
     }
 
-    private static double Radge = 180.0 / Math.PI;
-    private static double Degrad = Math.PI / 180.0;
+    private static readonly double Radge = 180.0 / Math.PI;
+    private static readonly double Degrad = Math.PI / 180.0;
 
     #endregion
 
@@ -377,20 +374,24 @@ public static class DayTimeCalculation
 }
 
 /// <summary>
-/// 日出日落时间结果
+///     日出日落时间结果
 /// </summary>
 public class SunTimeResult
 {
+    #region 私成员
+
+    #endregion
+
     #region 构造与析构
 
     /// <summary>
-    /// 构造函数
+    ///     构造函数
     /// </summary>
     /// <param name="sunrise">日出时间</param>
     /// <param name="sunset">日落时间</param>
     public SunTimeResult(DateTime sunrise, DateTime sunset)
     {
-        _sunriseTime = sunrise;
+        SunriseTime = sunrise;
         SunsetTime = sunset;
     }
 
@@ -399,21 +400,14 @@ public class SunTimeResult
     #region 属性定义
 
     /// <summary>
-    /// 获取日出时间
+    ///     获取日出时间
     /// </summary>
-    public DateTime SunriseTime => _sunriseTime;
+    public DateTime SunriseTime { get; }
 
     /// <summary>
-    /// 获取日落时间
+    ///     获取日落时间
     /// </summary>
     public DateTime SunsetTime { get; }
-
-    #endregion
-
-
-    #region 私成员
-
-    private DateTime _sunriseTime; //日出时间
 
     #endregion
 }

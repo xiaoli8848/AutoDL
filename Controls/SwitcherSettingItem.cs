@@ -1,36 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace AutoDL.Controls;
 
-namespace AutoDL.Controls
+public class SwitcherSettingItem : SettingItem
 {
-    public class SwitcherSettingItem : SettingItem
+    public static readonly DependencyProperty IsOnProperty = DependencyProperty.Register(
+        nameof(IsOn),
+        typeof(bool),
+        typeof(SwitcherSettingItem),
+        new PropertyMetadata(false));
+
+    public SwitcherSettingItem()
     {
-        public bool IsOn
+        var switcher = new ToggleSwitch();
+        var binding = new Binding
         {
-            get => (bool)GetValue(IsOnProperty);
-            set => SetValue(IsOnProperty, value);
-        }
+            Source = this,
+            Path = new PropertyPath("IsOn"),
+            Mode = BindingMode.TwoWay
+        };
+        switcher.SetBinding(ToggleSwitch.IsOnProperty, binding);
+        SettingContent = switcher;
+    }
 
-        public static readonly DependencyProperty IsOnProperty = DependencyProperty.Register(
-            nameof(IsOn),
-            typeof(bool),
-            typeof(SwitcherSettingItem),
-            new PropertyMetadata(false));
-
-        public SwitcherSettingItem()
-        {
-            var switcher = new ToggleSwitch();
-            var binding = new Binding
-            {
-                Source = this,
-                Path = new PropertyPath("IsOn"),
-                Mode = BindingMode.TwoWay
-            };
-            switcher.SetBinding(ToggleSwitch.IsOnProperty, binding);
-            this.SettingContent = switcher;
-        }
+    public bool IsOn
+    {
+        get => (bool)GetValue(IsOnProperty);
+        set => SetValue(IsOnProperty, value);
     }
 }

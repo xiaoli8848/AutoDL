@@ -7,48 +7,63 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:SettingItem">
-                    <Grid Height="70" Background="{ThemeResource SystemControlForegroundAltHighBrush}" CornerRadius="6" BorderBrush="{ThemeResource SettingItemBorderBrush}" BorderThickness="0.5" x:Name="ItemGrid">
+                    <Grid Height="70" Background="{ThemeResource SystemControlForegroundAltHighBrush}" CornerRadius="6"
+                          BorderBrush="{ThemeResource SettingItemBorderBrush}" BorderThickness="0.5">
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
+                            <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="18"/>
-                            <ColumnDefinition Width="50"/>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="18" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <ContentPresenter Grid.RowSpan="2" Grid.Column="1" Content="{TemplateBinding Icon}" Margin="10"/>
-                        <TextBlock Grid.Column="2" Grid.Row="0" Style="{StaticResource HeaderTextBlockStyle}" Text="{TemplateBinding Header}" VerticalAlignment="Bottom" FontSize="16"/>
-                        <TextBlock Grid.Column="2" Grid.Row="1" Style="{StaticResource BaseTextBlockStyle}" Text="{TemplateBinding Label}" VerticalAlignment="Top" Foreground="Gray" Margin="0,2,0,0" FontWeight="Normal" FontSize="12"/>
-                        <ContentPresenter Grid.RowSpan="2" Grid.Column="3" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Content="{TemplateBinding SettingContent}"/>
+                        <ContentPresenter Grid.RowSpan="2" Grid.Column="1" Content="{TemplateBinding Icon}" Margin="10" />
+                        <TextBlock Grid.Column="2" Grid.Row="0" Style="{StaticResource HeaderTextBlockStyle}"
+                                   Text="{TemplateBinding Header}" VerticalAlignment="Bottom" FontSize="16" />
+                        <TextBlock Grid.Column="2" Grid.Row="1" Style="{StaticResource BaseTextBlockStyle}"
+                                   Text="{TemplateBinding Label}" VerticalAlignment="Top" Foreground="Gray"
+                                   Margin="0,2,0,0" FontWeight="Normal" FontSize="12" />
+                        <ContentPresenter Grid.RowSpan="2" Grid.Column="3" VerticalAlignment="Center"
+                                          VerticalContentAlignment="Center" HorizontalAlignment="Right"
+                                          HorizontalContentAlignment="Right" Content="{TemplateBinding SettingContent}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
 
     <Style TargetType="local:ExpanderSettingItem">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:ExpanderSettingItem">
-                    <Expander Background="{ThemeResource SystemControlForegroundAltHighBrush}" HorizontalAlignment="Stretch" BorderBrush="{ThemeResource SettingItemBorderBrush}" BorderThickness="0.5" Content="{TemplateBinding ExpanderSettingContent}">
+                    <Expander Background="{ThemeResource SystemControlForegroundAltHighBrush}"
+                              HorizontalAlignment="Stretch" BorderBrush="{ThemeResource SettingItemBorderBrush}"
+                              BorderThickness="0.5" Content="{TemplateBinding ExpanderSettingContent}">
                         <Expander.Header>
                             <Grid Height="70" Background="{ThemeResource SystemControlForegroundAltHighBrush}">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
+                                    <RowDefinition />
+                                    <RowDefinition />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <ContentPresenter Grid.RowSpan="2" Grid.Column="0" Content="{TemplateBinding Icon}" Margin="10"/>
-                                <TextBlock Grid.Column="1" Grid.Row="0" Style="{StaticResource HeaderTextBlockStyle}" Text="{TemplateBinding Header}" VerticalAlignment="Bottom" FontSize="16"/>
-                                <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource BaseTextBlockStyle}" Text="{TemplateBinding Label}" VerticalAlignment="Top" Foreground="Gray" Margin="0,2,0,0" FontWeight="Normal" FontSize="12"/>
-                                <ContentPresenter Grid.RowSpan="2" Grid.Column="2" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Content="{TemplateBinding SettingContent}"/>
+                                <ContentPresenter Grid.RowSpan="2" Grid.Column="0" Content="{TemplateBinding Icon}"
+                                                  Margin="10" />
+                                <TextBlock Grid.Column="1" Grid.Row="0" Style="{StaticResource HeaderTextBlockStyle}"
+                                           Text="{TemplateBinding Header}" VerticalAlignment="Bottom" FontSize="16" />
+                                <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource BaseTextBlockStyle}"
+                                           Text="{TemplateBinding Label}" VerticalAlignment="Top" Foreground="Gray"
+                                           Margin="0,2,0,0" FontWeight="Normal" FontSize="12" />
+                                <ContentPresenter Grid.RowSpan="2" Grid.Column="2" VerticalAlignment="Center"
+                                                  VerticalContentAlignment="Center" HorizontalAlignment="Right"
+                                                  HorizontalContentAlignment="Right"
+                                                  Content="{TemplateBinding SettingContent}" />
                             </Grid>
                         </Expander.Header>
                     </Expander>

@@ -24,6 +24,8 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="AutoDLResource.xaml" />
+    <None Remove="Dialogs\ImportImageWallpaperDialog.xaml" />
+    <None Remove="Dialogs\ImportWallpaperEngineWallpaperDialog.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,12 +51,22 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Dialogs\ImportWallpaperEngineWallpaperDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="AutoDLResource.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Dialogs\ImportImageWallpaperDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
