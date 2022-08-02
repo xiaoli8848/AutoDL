@@ -16,16 +16,8 @@
             <XamlUICommand x:Key="AddWallpaperEngineWallpaper"
                            ExecuteRequested="AddWallpaperEngineWallpaper_OnExecuteRequested" />
         </Grid.Resources>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="120" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Image Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Source="Assets/Square44x44Logo.png"
-               Width="80" Height="80" Margin="20,0,0,0" />
-        <TextBlock Grid.Row="0" Margin="120,0,0,0" VerticalAlignment="Center"
-                   Style="{ThemeResource HeaderTextBlockStyle}" x:Uid="TitleTextBlock" />
 
-        <Pivot Grid.Row="1" Margin="20,10,20,30">
+        <Pivot Margin="20,10,20,30">
             <PivotItem x:Uid="AutoDLPivotItem">
                 <StackPanel Margin="0,10,0,0">
                     <controls:SwitcherSettingItem IsOn="{Binding Path=SwitcherEnabled, Mode=TwoWay}"

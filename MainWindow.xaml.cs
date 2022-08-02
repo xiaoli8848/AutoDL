@@ -1,7 +1,9 @@
-﻿using Windows.Graphics;
+﻿using Windows.ApplicationModel;
+using Windows.Graphics;
 using AutoDL.Dialogs;
 using AutoDL.Models;
 using AutoDL.Utilities;
+using Microsoft.UI.Windowing;
 
 
 // To learn more about WinUI, the WinUI project structure,
@@ -24,6 +26,7 @@ public sealed partial class MainWindow : Window
                 .Resize(new SizeInt32(UIHelper.GetActualPixel(750), UIHelper.GetActualPixel(800)));
         };
         _ = DayTimeCalculation._locator;
+        Title = "AutoDL";
     }
 
     private SettingsViewModel Settings => MainGrid.DataContext as SettingsViewModel;
