@@ -22,7 +22,7 @@ public class SettingItem : Control
         typeof(SettingItem),
         new PropertyMetadata(default(string)));
 
-    protected DependencyProperty SettingContentProperty = DependencyProperty.Register(
+    protected static readonly DependencyProperty SettingContentProperty = DependencyProperty.Register(
         nameof(SettingContent),
         typeof(UIElement),
         typeof(SettingItem),

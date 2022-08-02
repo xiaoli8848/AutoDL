@@ -25,7 +25,7 @@
                         <TextBlock Grid.Column="2" Grid.Row="1" Style="{StaticResource BaseTextBlockStyle}"
                                    Text="{TemplateBinding Label}" VerticalAlignment="Top" Foreground="Gray"
                                    Margin="0,2,0,0" FontWeight="Normal" FontSize="12" />
-                        <ContentPresenter Grid.RowSpan="2" Grid.Column="3" VerticalAlignment="Center"
+                        <ContentPresenter Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" VerticalAlignment="Center"
                                           VerticalContentAlignment="Center" HorizontalAlignment="Right"
                                           HorizontalContentAlignment="Right" Content="{TemplateBinding SettingContent}" />
                     </Grid>
@@ -60,7 +60,7 @@
                                 <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource BaseTextBlockStyle}"
                                            Text="{TemplateBinding Label}" VerticalAlignment="Top" Foreground="Gray"
                                            Margin="0,2,0,0" FontWeight="Normal" FontSize="12" />
-                                <ContentPresenter Grid.RowSpan="2" Grid.Column="2" VerticalAlignment="Center"
+                                <ContentPresenter Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" VerticalAlignment="Center"
                                                   VerticalContentAlignment="Center" HorizontalAlignment="Right"
                                                   HorizontalContentAlignment="Right"
                                                   Content="{TemplateBinding SettingContent}" />
