@@ -18,6 +18,7 @@ public class SwitcherSettingItem : SettingItem
             Mode = BindingMode.TwoWay
         };
         switcher.SetBinding(ToggleSwitch.IsOnProperty, binding);
+        
         SettingContent = switcher;
     }
 
