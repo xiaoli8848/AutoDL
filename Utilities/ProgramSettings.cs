@@ -13,6 +13,8 @@ namespace AutoDL.Utilities;
 /// </summary>
 public class ProgramSettings
 {
+    private static SettingsViewModel Settings => UIHelper.App.Settings;
+
 #if DEBUG
     static ProgramSettings()
     {
@@ -54,7 +56,7 @@ public class ProgramSettings
 
     public static TimeSpan[,] GetDefaultTimeSpans()
     {
-        var numbers = (Application.Current as App).SettingsViewModel.Wallpapers.Count + 1;
+        var numbers = Settings.Wallpapers.Count + 1;
         if (numbers == 1) return new[,] { { TimeSpan.Zero, new TimeSpan(0, 24, 0, 0) } };
         var result = new TimeSpan[numbers, 2];
         var span = Convert.ToInt32(Math.Floor((double)24 / numbers));
@@ -79,6 +81,6 @@ public class ProgramSettings
 
     public static (TimeSpan, TimeSpan) GetDefaultTimeSpan()
     {
-        return GetDefaultTimeSpan((Application.Current as App).SettingsViewModel.Wallpapers.Count);
+        return GetDefaultTimeSpan(Settings.Wallpapers.Count);
     }
 }

@@ -123,9 +123,6 @@
   <data name="AddWallpaperEngineWallpaperAppBarButton.Label" xml:space="preserve">
     <value>添加动态壁纸</value>
   </data>
-  <data name="AutoDLPivotItem.Header" xml:space="preserve">
-    <value>自动化设置</value>
-  </data>
   <data name="DarkTimeEndPicker.Header" xml:space="preserve">
     <value>结束时间</value>
   </data>
@@ -155,6 +152,9 @@
   </data>
   <data name="IsOnSwitcher.Label" xml:space="preserve">
     <value>开启后，将自动切换系统颜色主题。</value>
+  </data>
+  <data name="ThemeAutomationNavigationViewItem.Content" xml:space="preserve">
+    <value>主题自动化</value>
   </data>
   <data name="TitleTextBlock.Text" xml:space="preserve">
     <value>AutoDL</value>

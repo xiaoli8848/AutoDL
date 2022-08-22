@@ -25,7 +25,7 @@ public static class ThemeSwitcher
         };
     }
 
-    private static SettingsViewModel Settings => (Application.Current as App).SettingsViewModel;
+    private static SettingsViewModel Settings => UIHelper.App.Settings;
 
     private static Wallpaper GetCurrentWallpaper(TimeSpan now)
     {

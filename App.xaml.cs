@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using AutoDL.Dialogs;
 using AutoDL.Models;
 using AutoDL.Utilities;
 
@@ -13,7 +14,7 @@ namespace AutoDL;
 public partial class App : Application
 {
     public Window m_window;
-    public SettingsViewModel SettingsViewModel = new();
+    public readonly SettingsViewModel Settings = new();
 
     /// <summary>
     ///     Initializes the singleton application object.  This is the first line of authored code
@@ -35,23 +36,6 @@ public partial class App : Application
         m_window = new MainWindow();
         m_window.Activate();
     }
-}
 
-public class InverseBooleanConverter : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, string language)
-    {
-        if (value is bool passed)
-            return !passed;
-
-        return null;
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, string language)
-    {
-        if (value is bool passed)
-            return !passed;
-
-        return null;
-    }
+    
 }

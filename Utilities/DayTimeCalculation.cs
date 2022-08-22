@@ -7,7 +7,7 @@ namespace AutoDL.Utilities;
 public static class DayTimeCalculation
 {
     public static Geolocator _locator = new();
-    private static SettingsViewModel Settings => (Application.Current as App).SettingsViewModel;
+    private static SettingsViewModel Settings => UIHelper.App.Settings;
 
     #region 自动更新设置项
 

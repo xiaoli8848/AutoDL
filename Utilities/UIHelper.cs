@@ -11,20 +11,36 @@ namespace AutoDL.Utilities;
 
 public static class UIHelper
 {
+    public const int ICON_BIG = 1;
+    public const int ICON_SMALL = 0;
+    public const int WA_ACTIVE = 0x01;
+    public const int WA_INACTIVE = 0x00;
+    public const int WM_ACTIVATE = 0x0006;
+    public const int WM_SETICON = 0x0080;
+
     private static WindowsSystemDispatcherQueueHelper m_wsdqHelper; // See separate sample below for implementation
     private static MicaController m_micaController;
     private static SystemBackdropConfiguration m_configurationSource;
     private static readonly double _scale = GetScaleAdjustment();
 
-    private static MainWindow MainWindow => (MainWindow)(Application.Current as App).m_window;
+    public static MainWindow MainWindow => (MainWindow)(Application.Current as App).m_window;
 
     [DllImport("Shcore.dll", SetLastError = true)]
     private static extern int GetDpiForMonitor(IntPtr hmonitor, Monitor_DPI_Type dpiType, out uint dpiX, out uint dpiY);
 
-    public static AppWindow GetAppWindow()
-    {
-        return AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(WindowNative.GetWindowHandle(MainWindow)));
-    }
+    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+    public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, IntPtr lParam);
+
+    [DllImport("user32.dll")]
+    public static extern IntPtr GetActiveWindow();
+
+    public static AppWindow AppWindow => AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(WindowNative.GetWindowHandle(MainWindow)));
+
+    public static App App => Application.Current as App;
+
+    public static IntPtr MainWindow_Handle = WindowNative.GetWindowHandle(MainWindow);
+
+    public static WindowId MainWindow_ID = Win32Interop.GetWindowIdFromWindow(MainWindow_Handle);
 
     private static double GetScaleAdjustment()
     {
@@ -47,31 +63,27 @@ public static class UIHelper
 
     public static bool TrySetMicaBackdrop()
     {
-        if (MicaController.IsSupported())
-        {
-            m_wsdqHelper = new WindowsSystemDispatcherQueueHelper();
-            m_wsdqHelper.EnsureWindowsSystemDispatcherQueueController();
+        if (!MicaController.IsSupported()) return false; // Mica is not supported on this system
+        m_wsdqHelper = new WindowsSystemDispatcherQueueHelper();
+        m_wsdqHelper.EnsureWindowsSystemDispatcherQueueController();
 
-            // Hooking up the policy object
-            m_configurationSource = new SystemBackdropConfiguration();
-            MainWindow.Activated += Window_Activated;
-            ((FrameworkElement)MainWindow.Content).ActualThemeChanged += Window_ThemeChanged;
+        // Hooking up the policy object
+        m_configurationSource = new SystemBackdropConfiguration();
+        MainWindow.Activated += Window_Activated;
+        ((FrameworkElement)MainWindow.Content).ActualThemeChanged += Window_ThemeChanged;
 
-            // Initial configuration state.
-            m_configurationSource.IsInputActive = true;
-            SetConfigurationSourceTheme();
+        // Initial configuration state.
+        m_configurationSource.IsInputActive = true;
+        SetConfigurationSourceTheme();
 
-            m_micaController = new MicaController();
+        m_micaController = new MicaController();
 
-            // Enable the system backdrop.
-            // Note: Be sure to have "using WinRT;" to support the Window.As<...>() call.
-            m_micaController.AddSystemBackdropTarget(((MainWindow)(Application.Current as App).m_window)
-                .As<ICompositionSupportsSystemBackdrop>());
-            m_micaController.SetSystemBackdropConfiguration(m_configurationSource);
-            return true; // succeeded
-        }
-
-        return false; // Mica is not supported on this system
+        // Enable the system backdrop.
+        // Note: Be sure to have "using WinRT;" to support the Window.As<...>() call.
+        m_micaController.AddSystemBackdropTarget(((MainWindow)(Application.Current as App).m_window)
+            .As<ICompositionSupportsSystemBackdrop>());
+        m_micaController.SetSystemBackdropConfiguration(m_configurationSource);
+        return true; // succeeded
     }
 
     private static void SetConfigurationSourceTheme()
@@ -106,6 +118,26 @@ public static class UIHelper
         MDT_Angular_DPI = 1,
         MDT_Raw_DPI = 2,
         MDT_Default = MDT_Effective_DPI
+    }
+
+    public static void SetTitleBarTransparent()
+    {
+        var res = Application.Current.Resources;
+        res["WindowCaptionBackground"] = Colors.Transparent;
+        res["WindowCaptionForeground"] = Colors.Black;
+
+        // 须获取MainWindow句柄和ActiveWindow句柄实例，详见文末备注。
+        var activeWindow = GetActiveWindow();
+        if (MainWindow_Handle == activeWindow)
+        {
+            SendMessage(MainWindow_Handle, WM_ACTIVATE, WA_INACTIVE, IntPtr.Zero);
+            SendMessage(MainWindow_Handle, WM_ACTIVATE, WA_ACTIVE, IntPtr.Zero);
+        }
+        else
+        {
+            SendMessage(MainWindow_Handle, WM_ACTIVATE, WA_ACTIVE, IntPtr.Zero);
+            SendMessage(MainWindow_Handle, WM_ACTIVATE, WA_INACTIVE, IntPtr.Zero);
+        }
     }
 }
 

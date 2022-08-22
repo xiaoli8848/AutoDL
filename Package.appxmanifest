@@ -41,6 +41,14 @@
 				<uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"  Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
 				<uap:SplashScreen Image="Assets\SplashScreen.png" />
 			</uap:VisualElements>
+			<Extensions>
+				<Extension Category="windows.backgroundTasks" EntryPoint="BackgroundTasksResearch.TimerBackgroundTask">
+					<BackgroundTasks>
+						<Task Type="timer"/>
+						<Task Type="audio"/>
+					</BackgroundTasks>
+				</Extension>
+			</Extensions>
 		</Application>
 	</Applications>
 
@@ -49,4 +57,12 @@
 		<uap2:Capability Name="spatialPerception"/>
 		<DeviceCapability Name="location"/>
 	</Capabilities>
+	<Extensions>
+		<Extension Category="windows.activatableClass.inProcessServer">
+			<InProcessServer>
+				<Path>Autymate.Desktop.dll</Path>
+				<ActivatableClass ActivatableClassId="Autymate.Desktop.Backgrounds.NotificationBackgroundTask" ThreadingModel="both"/>
+			</InProcessServer>
+		</Extension>
+	</Extensions>
 </Package>
