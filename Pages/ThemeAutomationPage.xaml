@@ -2,27 +2,25 @@
     x:Class="AutoDL.Pages.ThemeAutomationPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:AutoDL.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:AutoDL.Controls"
-    xmlns:models="using:AutoDL.Models"
     mc:Ignorable="d">
 
     <Grid x:Name="MainGrid">
         <StackPanel Margin="15">
             <StackPanel.Resources>
                 <Style TargetType="controls:SwitcherSettingItem">
-                    <Setter Property="Margin" Value="0,0,0,5"/>
+                    <Setter Property="Margin" Value="0,0,0,5" />
                 </Style>
                 <Style TargetType="controls:ExpanderSettingItem">
-                    <Setter Property="Margin" Value="0,0,0,5"/>
+                    <Setter Property="Margin" Value="0,0,0,5" />
                 </Style>
                 <Style TargetType="controls:SwitcherExpanderSettingItem">
-                    <Setter Property="Margin" Value="0,0,0,5"/>
+                    <Setter Property="Margin" Value="0,0,0,5" />
                 </Style>
                 <Style TargetType="controls:SettingItem">
-                    <Setter Property="Margin" Value="0,0,0,5"/>
+                    <Setter Property="Margin" Value="0,0,0,5" />
                 </Style>
             </StackPanel.Resources>
             <controls:SwitcherSettingItem IsOn="{Binding Path=SwitcherEnabled, Mode=TwoWay}"
@@ -32,7 +30,7 @@
                 </controls:SwitcherSettingItem.Icon>
             </controls:SwitcherSettingItem>
             <controls:SwitcherExpanderSettingItem IsOn="{Binding Path=UseSunRiseAndSunSetTime, Mode=TwoWay}"
-                                                          x:Uid="UseSunRiseAndSunSetTimeSwitcher">
+                                                  x:Uid="UseSunRiseAndSunSetTimeSwitcher">
                 <controls:SwitcherExpanderSettingItem.Icon>
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEC43;" />
                 </controls:SwitcherExpanderSettingItem.Icon>
@@ -42,60 +40,14 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <TimePicker Grid.Column="0" ClockIdentifier="24HourClock" x:Uid="DarkTimeStartPicker"
-                                        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,35,0"
-                                        Time="{Binding Path=DarkTimeStart, Mode=TwoWay}"
-                                        IsEnabled="{Binding Path=UseSunRiseAndSunSetTime, Converter={StaticResource InverseBooleanConverter}, Mode=TwoWay}" />
+                                VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,35,0"
+                                Time="{Binding Path=DarkTimeStart, Mode=TwoWay}"
+                                IsEnabled="{Binding Path=UseSunRiseAndSunSetTime, Converter={StaticResource InverseBooleanConverter}, Mode=TwoWay}" />
                     <TimePicker Grid.Column="1" ClockIdentifier="24HourClock" x:Uid="DarkTimeEndPicker"
-                                        VerticalAlignment="Center" HorizontalContentAlignment="Center"
-                                        Margin="0,0,35,0"
-                                        IsEnabled="{Binding Path=UseSunRiseAndSunSetTime, Converter={StaticResource InverseBooleanConverter}, Mode=TwoWay}"
-                                        Time="{Binding Path=DarkTimeEnd, Mode=TwoWay}" />
-                </Grid>
-            </controls:SwitcherExpanderSettingItem>
-            <controls:SwitcherExpanderSettingItem IsOn="{Binding Path=UseCustomWallpaper, Mode=TwoWay}"
-                                                          x:Name="UseCustomWallpaperSwitcher"
-                                                          x:Uid="UseCustomWallpaperSwitcher">
-                <controls:SwitcherExpanderSettingItem.Icon>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF246;" />
-                </controls:SwitcherExpanderSettingItem.Icon>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50" />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <CommandBar Grid.Row="0" Background="Transparent" DefaultLabelPosition="Right">
-                        <AppBarButton Icon="Add" x:Uid="AddImageWallpaperAppBarButton"
-                                              Command="{StaticResource AddImageWallpaper}" />
-                        <AppBarButton Icon="Add" x:Uid="AddWallpaperEngineWallpaperAppBarButton"
-                                              Command="{StaticResource AddWallpaperEngineWallpaper}" />
-                    </CommandBar>
-                    <ListView Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,5,0,0"
-                                      IsEnabled="{x:Bind UseCustomWallpaperSwitcher.IsOn, Mode=OneWay}"
-                                      ItemsSource="{Binding Path=Wallpapers, Mode=OneWay}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="models:Wallpaper">
-                                <Grid Width="550">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="180" />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-                                    <Image Grid.Column="0" Grid.RowSpan="2" Source="{x:Bind PreviewImageSource}"
-                                                   HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    <TimePicker Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"
-                                                        VerticalAlignment="Center"
-                                                        Time="{x:Bind StartTime, Mode=TwoWay}"
-                                                        x:Uid="WallpaperStartTimePicker" />
-                                    <TimePicker Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right"
-                                                        VerticalAlignment="Center" Time="{x:Bind EndTime, Mode=TwoWay}"
-                                                        x:Uid="WallpaperEndTimePicker" />
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                VerticalAlignment="Center" HorizontalContentAlignment="Center"
+                                Margin="0,0,35,0"
+                                IsEnabled="{Binding Path=UseSunRiseAndSunSetTime, Converter={StaticResource InverseBooleanConverter}, Mode=TwoWay}"
+                                Time="{Binding Path=DarkTimeEnd, Mode=TwoWay}" />
                 </Grid>
             </controls:SwitcherExpanderSettingItem>
         </StackPanel>

@@ -30,9 +30,8 @@ public static class ThemeSwitcher
     private static Wallpaper GetCurrentWallpaper(TimeSpan now)
     {
         foreach (var item in Settings.Wallpapers)
-        {
-            if (now.CompareTo(item.StartTime) >= 0 && now.CompareTo(item.EndTime) <= 0) return item;
-        }
+            if (now.CompareTo(item.StartTime) >= 0 && now.CompareTo(item.EndTime) <= 0)
+                return item;
         return null;
     }
 
@@ -71,7 +70,7 @@ public static class ThemeSwitcher
         if (Settings.UseCustomWallpaper)
         {
             var wallpaper = GetCurrentWallpaper(now);
-            if(wallpaper is not null)   wallpaper.SetWallpaper();
+            if (wallpaper is not null) wallpaper.SetWallpaper();
         }
     }
 

@@ -13,14 +13,13 @@ namespace AutoDL.Utilities;
 /// </summary>
 public class ProgramSettings
 {
-    private static SettingsViewModel Settings => UIHelper.App.Settings;
-
 #if DEBUG
     static ProgramSettings()
     {
         if (LocalSettings is not null) Registry.CurrentUser.OpenSubKey(@"Software", true).DeleteSubKeyTree("AutoDL");
     }
 #endif
+    private static SettingsViewModel Settings => UIHelper.App.Settings;
     public static RegistryKey LocalSettings => Registry.CurrentUser.OpenSubKey(@"Software\AutoDL", true);
 
     public static string GetStringSetting(string key)

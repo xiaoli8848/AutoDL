@@ -378,10 +378,6 @@ public static class DayTimeCalculation
 /// </summary>
 public class SunTimeResult
 {
-    #region 私成员
-
-    #endregion
-
     #region 构造与析构
 
     /// <summary>
@@ -394,6 +390,10 @@ public class SunTimeResult
         SunriseTime = sunrise;
         SunsetTime = sunset;
     }
+
+    #endregion
+
+    #region 私成员
 
     #endregion
 

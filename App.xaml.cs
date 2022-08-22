@@ -1,6 +1,4 @@
-﻿using System.IO;
-using AutoDL.Dialogs;
-using AutoDL.Models;
+﻿using AutoDL.Models;
 using AutoDL.Utilities;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -13,8 +11,8 @@ namespace AutoDL;
 /// </summary>
 public partial class App : Application
 {
-    public Window m_window;
     public readonly SettingsViewModel Settings = new();
+    public Window m_window;
 
     /// <summary>
     ///     Initializes the singleton application object.  This is the first line of authored code
@@ -36,6 +34,4 @@ public partial class App : Application
         m_window = new MainWindow();
         m_window.Activate();
     }
-
-    
 }

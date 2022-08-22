@@ -1,6 +1,4 @@
-﻿
-
-// To learn more about WinUI, the WinUI project structure,
+﻿// To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 using AutoDL.Dialogs;
@@ -14,11 +12,13 @@ namespace AutoDL;
 /// </summary>
 public sealed partial class AutoDLResource : ResourceDictionary
 {
-    private static SettingsViewModel Settings => UIHelper.App.Settings;
     public AutoDLResource()
     {
         InitializeComponent();
     }
+
+    private static SettingsViewModel Settings => UIHelper.App.Settings;
+
     private async void AddImageWallpaper_OnExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args)
     {
         var result = await ImportImageWallpaperDialog.ImportImageWallpaperAsync(UIHelper.MainWindow.Content.XamlRoot);
@@ -28,7 +28,9 @@ public sealed partial class AutoDLResource : ResourceDictionary
     private async void AddWallpaperEngineWallpaper_OnExecuteRequested(XamlUICommand sender,
         ExecuteRequestedEventArgs args)
     {
-        var result = await ImportWallpaperEngineWallpaperDialog.ImportWallpaperEngineWallpaperAsync(UIHelper.MainWindow.Content.XamlRoot);
+        var result =
+            await ImportWallpaperEngineWallpaperDialog.ImportWallpaperEngineWallpaperAsync(UIHelper.MainWindow.Content
+                .XamlRoot);
         if (result is not null) Settings.Wallpapers.Add(result);
     }
 }

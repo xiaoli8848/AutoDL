@@ -23,7 +23,16 @@ public static class UIHelper
     private static SystemBackdropConfiguration m_configurationSource;
     private static readonly double _scale = GetScaleAdjustment();
 
+    public static IntPtr MainWindow_Handle = WindowNative.GetWindowHandle(MainWindow);
+
+    public static WindowId MainWindow_ID = Win32Interop.GetWindowIdFromWindow(MainWindow_Handle);
+
     public static MainWindow MainWindow => (MainWindow)(Application.Current as App).m_window;
+
+    public static AppWindow AppWindow =>
+        AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(WindowNative.GetWindowHandle(MainWindow)));
+
+    public static App App => Application.Current as App;
 
     [DllImport("Shcore.dll", SetLastError = true)]
     private static extern int GetDpiForMonitor(IntPtr hmonitor, Monitor_DPI_Type dpiType, out uint dpiX, out uint dpiY);
@@ -33,14 +42,6 @@ public static class UIHelper
 
     [DllImport("user32.dll")]
     public static extern IntPtr GetActiveWindow();
-
-    public static AppWindow AppWindow => AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(WindowNative.GetWindowHandle(MainWindow)));
-
-    public static App App => Application.Current as App;
-
-    public static IntPtr MainWindow_Handle = WindowNative.GetWindowHandle(MainWindow);
-
-    public static WindowId MainWindow_ID = Win32Interop.GetWindowIdFromWindow(MainWindow_Handle);
 
     private static double GetScaleAdjustment()
     {
@@ -112,14 +113,6 @@ public static class UIHelper
         m_configurationSource.IsInputActive = args.WindowActivationState != WindowActivationState.Deactivated;
     }
 
-    private enum Monitor_DPI_Type
-    {
-        MDT_Effective_DPI = 0,
-        MDT_Angular_DPI = 1,
-        MDT_Raw_DPI = 2,
-        MDT_Default = MDT_Effective_DPI
-    }
-
     public static void SetTitleBarTransparent()
     {
         var res = Application.Current.Resources;
@@ -138,6 +131,14 @@ public static class UIHelper
             SendMessage(MainWindow_Handle, WM_ACTIVATE, WA_ACTIVE, IntPtr.Zero);
             SendMessage(MainWindow_Handle, WM_ACTIVATE, WA_INACTIVE, IntPtr.Zero);
         }
+    }
+
+    private enum Monitor_DPI_Type
+    {
+        MDT_Effective_DPI = 0,
+        MDT_Angular_DPI = 1,
+        MDT_Raw_DPI = 2,
+        MDT_Default = MDT_Effective_DPI
     }
 }
 

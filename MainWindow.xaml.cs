@@ -1,10 +1,7 @@
-﻿using Windows.ApplicationModel;
-using Windows.Graphics;
-using AutoDL.Dialogs;
-using AutoDL.Models;
+﻿using Windows.Graphics;
+using Windows.UI.Shell;
 using AutoDL.Pages;
 using AutoDL.Utilities;
-using Microsoft.UI.Windowing;
 
 
 // To learn more about WinUI, the WinUI project structure,
@@ -19,7 +16,8 @@ public sealed partial class MainWindow : Window
 {
     private readonly List<(string Tag, Type Page)> Pages = new()
     {
-        ("ThemeAutomationPage", typeof(ThemeAutomationPage))
+        ("ThemeAutomationPage", typeof(ThemeAutomationPage)),
+        ("WallpaperAutomationPage", typeof(WallpaperAutomationPage))
     };
 
     public MainWindow()
@@ -29,6 +27,7 @@ public sealed partial class MainWindow : Window
         {
             UIHelper.AppWindow.Resize(new SizeInt32(UIHelper.GetActualPixel(750), UIHelper.GetActualPixel(800)));
             UIHelper.TrySetMicaBackdrop();
+            UIHelper.AppWindow.Title = "AutoDL";
             // UIHelper.SetTitleBarTransparent();
         };
         _ = DayTimeCalculation._locator;
@@ -41,8 +40,6 @@ public sealed partial class MainWindow : Window
     {
         var item = Pages.FirstOrDefault(p => p.Tag.Equals(args.InvokedItemContainer.Tag.ToString()));
         if (ContentFrame.CurrentSourcePageType != item.Page)
-        {
             ContentFrame.Navigate(item.Page, null, args.RecommendedNavigationTransitionInfo);
-        }
     }
 }

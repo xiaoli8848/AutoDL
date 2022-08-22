@@ -8,9 +8,9 @@ namespace AutoDL.Pages;
 /// <summary>
 ///     An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class ThemeAutomationPage : Page
+public sealed partial class WallpaperAutomationPage : Page
 {
-    public ThemeAutomationPage()
+    public WallpaperAutomationPage()
     {
         InitializeComponent();
         MainGrid.DataContext = UIHelper.App.Settings;

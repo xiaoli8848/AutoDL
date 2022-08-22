@@ -15,8 +15,9 @@
             <SolidColorBrush Color="Gray" x:Key="SettingItemBorderBrush" />
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
-    <local:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    <local:InverseBooleanConverter x:Key="InverseBooleanConverter" />
     <XamlUICommand x:Key="AddImageWallpaper" ExecuteRequested="AddImageWallpaper_OnExecuteRequested" />
-    <XamlUICommand x:Key="AddWallpaperEngineWallpaper" ExecuteRequested="AddWallpaperEngineWallpaper_OnExecuteRequested" />
+    <XamlUICommand x:Key="AddWallpaperEngineWallpaper"
+                   ExecuteRequested="AddWallpaperEngineWallpaper_OnExecuteRequested" />
 
 </ResourceDictionary>

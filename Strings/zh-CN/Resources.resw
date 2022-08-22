@@ -171,8 +171,17 @@
   <data name="UseSunRiseAndSunSetTimeSwitcher.Label" xml:space="preserve">
     <value>根据定位计算日出日落时间。</value>
   </data>
+  <data name="WallpaperAutomationNavigationViewItem.Content" xml:space="preserve">
+    <value>壁纸自动化</value>
+  </data>
   <data name="WallpaperEndTimePicker.Header" xml:space="preserve">
     <value>结束时间</value>
+  </data>
+  <data name="WallpapersSwitcher.Header" xml:space="preserve">
+    <value>壁纸选择器</value>
+  </data>
+  <data name="WallpapersSwitcher.Label" xml:space="preserve">
+    <value>设置每个时段使用的壁纸。</value>
   </data>
   <data name="WallpaperStartTimePicker.Header" xml:space="preserve">
     <value>开始时间</value>

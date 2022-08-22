@@ -18,7 +18,7 @@
                             <ColumnDefinition Width="50" />
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition />
-                            <ColumnDefinition Width="61"/>
+                            <ColumnDefinition Width="61" />
                         </Grid.ColumnDefinitions>
                         <ContentPresenter Grid.RowSpan="2" Grid.Column="1" Content="{TemplateBinding Icon}" Margin="10" />
                         <TextBlock Grid.Column="2" Grid.Row="0" Style="{StaticResource HeaderTextBlockStyle}"
@@ -50,7 +50,7 @@
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0"/>
+                                    <ColumnDefinition Width="0" />
                                     <ColumnDefinition Width="50" />
                                     <ColumnDefinition Width="auto" />
                                     <ColumnDefinition />
@@ -62,7 +62,8 @@
                                 <TextBlock Grid.Column="2" Grid.Row="1" Style="{StaticResource BaseTextBlockStyle}"
                                            Text="{TemplateBinding Label}" VerticalAlignment="Top" Foreground="Gray"
                                            Margin="0,2,0,0" FontWeight="Normal" FontSize="12" />
-                                <ContentPresenter Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" VerticalAlignment="Center"
+                                <ContentPresenter Grid.Row="0" Grid.RowSpan="2" Grid.Column="3"
+                                                  VerticalAlignment="Center"
                                                   VerticalContentAlignment="Center" HorizontalAlignment="Right"
                                                   HorizontalContentAlignment="Right" Width="75"
                                                   Content="{TemplateBinding SettingContent}" />
