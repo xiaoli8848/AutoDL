@@ -4,9 +4,50 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tb="using:H.NotifyIcon"
+    xmlns:controls="using:AutoDL.Controls"
     mc:Ignorable="d">
 
     <Grid>
+        <Grid.Resources>
+            <XamlUICommand
+                x:Key="ShowHideWindowCommand"
+                x:Uid="TrayIconShowHideWindowCommand"
+                ExecuteRequested="ShowHideWindowCommand_OnExecuteRequested">
+                <XamlUICommand.IconSource>
+                    <SymbolIconSource Symbol="OpenPane"/>
+                </XamlUICommand.IconSource>
+                <XamlUICommand.KeyboardAccelerators>
+                    <KeyboardAccelerator
+                        Key="S"
+                        Modifiers="Control"
+                    />
+                </XamlUICommand.KeyboardAccelerators>
+            </XamlUICommand>
+            <XamlUICommand
+                x:Key="ExitApplicationCommand"
+                x:Uid="TrayIconExitApplicationCommand"
+                Label="Exit"
+                Description="Exit"
+                ExecuteRequested="ExitApplicationCommand_OnExecuteRequested">
+                <XamlUICommand.IconSource>
+                    <SymbolIconSource Symbol="ClosePane" />
+                </XamlUICommand.IconSource>
+                <XamlUICommand.KeyboardAccelerators>
+                    <KeyboardAccelerator
+                        Key="E"
+                        Modifiers="Control"
+                    />
+                </XamlUICommand.KeyboardAccelerators>
+            </XamlUICommand>
+            <MenuFlyout
+                x:Key="TrayContextFlyout"
+                AreOpenCloseAnimationsEnabled="False">
+                <MenuFlyoutItem Command="{StaticResource ShowHideWindowCommand}"/>
+                <MenuFlyoutSeparator />
+                <MenuFlyoutItem Command="{StaticResource ExitApplicationCommand}"/>
+            </MenuFlyout>
+        </Grid.Resources>
         <NavigationView x:Name="NavigationView" IsBackButtonVisible="Collapsed" PaneDisplayMode="Top"
                         ItemInvoked="NavigationView_OnItemInvoked" IsSettingsVisible="False">
             <NavigationView.MenuItems>
@@ -25,5 +66,13 @@
             </NavigationView.MenuItems>
             <Frame x:Name="ContentFrame" />
         </NavigationView>
+        <tb:TaskbarIcon
+            x:Name="TrayIcon"
+            ToolTipText="AutoDL"
+            ContextFlyout="{StaticResource TrayContextFlyout}"
+            MenuActivation="LeftOrRightClick"
+            PopupActivation="DoubleClick"
+            ContextMenuMode="SecondWindow"
+        />
     </Grid>
 </Window>

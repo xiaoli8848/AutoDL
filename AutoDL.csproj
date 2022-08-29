@@ -24,6 +24,9 @@
 		<WindowsPackageType>None</WindowsPackageType>
 	</PropertyGroup>
 	<ItemGroup>
+	  <Content Remove="Assets\Red.ico" />
+	</ItemGroup>
+	<ItemGroup>
 		<None Remove="AutoDLResource.xaml" />
 		<None Remove="Dialogs\ImportImageWallpaperDialog.xaml" />
 		<None Remove="Dialogs\ImportWallpaperEngineWallpaperDialog.xaml" />
@@ -41,9 +44,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.3" />
+		<PackageReference Include="H.NotifyIcon.WinUI" Version="2.0.64" />
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.4" />
 		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.1" />
-		<PackageReference Include="NotifyIcon" Version="1.1.0" />
 		<Manifest Include="$(ApplicationManifest)" />
 	</ItemGroup>
 
