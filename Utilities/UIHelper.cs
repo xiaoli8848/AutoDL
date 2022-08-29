@@ -11,18 +11,21 @@ namespace AutoDL.Utilities;
 
 public static class UIHelper
 {
-    private const int WaActive = 0x01;
-    private const int WaInactive = 0x00;
-    private const int WmActivate = 0x0006;
+    public const int ICON_BIG = 1;
+    public const int ICON_SMALL = 0;
+    public const int WA_ACTIVE = 0x01;
+    public const int WA_INACTIVE = 0x00;
+    public const int WM_ACTIVATE = 0x0006;
+    public const int WM_SETICON = 0x0080;
 
-    private static WindowsSystemDispatcherQueueHelper _mWsdqHelper; // See separate sample below for implementation
-    private static MicaController _mMicaController;
-    private static SystemBackdropConfiguration _mConfigurationSource;
-    private static readonly double Scale = GetScaleAdjustment();
+    private static WindowsSystemDispatcherQueueHelper m_wsdqHelper; // See separate sample below for implementation
+    private static MicaController m_micaController;
+    private static SystemBackdropConfiguration m_configurationSource;
+    private static readonly double _scale = GetScaleAdjustment();
 
-    public static IntPtr MainWindowHandle = WindowNative.GetWindowHandle(MainWindow);
+    public static IntPtr MainWindow_Handle = WindowNative.GetWindowHandle(MainWindow);
 
-    public static WindowId MainWindowId = Win32Interop.GetWindowIdFromWindow(MainWindowHandle);
+    public static WindowId MainWindow_ID = Win32Interop.GetWindowIdFromWindow(MainWindow_Handle);
 
     public static MainWindow MainWindow => (MainWindow)(Application.Current as App).m_window;
 
@@ -32,10 +35,9 @@ public static class UIHelper
     public static App App => Application.Current as App;
 
     [DllImport("Shcore.dll", SetLastError = true)]
-    private static extern int GetDpiForMonitor(IntPtr hmonitor, MonitorDpiType dpiType, out uint dpiX, out uint dpiY);
+    private static extern int GetDpiForMonitor(IntPtr hmonitor, Monitor_DPI_Type dpiType, out uint dpiX, out uint dpiY);
 
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    // ReSharper disable once MemberCanBePrivate.Global
     public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, IntPtr lParam);
 
     [DllImport("user32.dll")]
@@ -48,7 +50,7 @@ public static class UIHelper
         var hMonitor = Win32Interop.GetMonitorFromDisplayId(displayArea.DisplayId);
 
         // Get DPI.
-        var result = GetDpiForMonitor(hMonitor, MonitorDpiType.MdtDefault, out var dpiX, out var _);
+        var result = GetDpiForMonitor(hMonitor, Monitor_DPI_Type.MDT_Default, out var dpiX, out var _);
         if (result != 0) throw new Exception("Could not get DPI for monitor.");
 
         var scaleFactorPercent = (uint)(((long)dpiX * 100 + (96 >> 1)) / 96);
@@ -57,31 +59,31 @@ public static class UIHelper
 
     public static int GetActualPixel(double pixel)
     {
-        return Convert.ToInt32(pixel * Scale);
+        return Convert.ToInt32(pixel * _scale);
     }
 
     public static bool TrySetMicaBackdrop()
     {
         if (!MicaController.IsSupported()) return false; // Mica is not supported on this system
-        _mWsdqHelper = new WindowsSystemDispatcherQueueHelper();
-        _mWsdqHelper.EnsureWindowsSystemDispatcherQueueController();
+        m_wsdqHelper = new WindowsSystemDispatcherQueueHelper();
+        m_wsdqHelper.EnsureWindowsSystemDispatcherQueueController();
 
         // Hooking up the policy object
-        _mConfigurationSource = new SystemBackdropConfiguration();
+        m_configurationSource = new SystemBackdropConfiguration();
         MainWindow.Activated += Window_Activated;
         ((FrameworkElement)MainWindow.Content).ActualThemeChanged += Window_ThemeChanged;
 
         // Initial configuration state.
-        _mConfigurationSource.IsInputActive = true;
+        m_configurationSource.IsInputActive = true;
         SetConfigurationSourceTheme();
 
-        _mMicaController = new MicaController();
+        m_micaController = new MicaController();
 
         // Enable the system backdrop.
         // Note: Be sure to have "using WinRT;" to support the Window.As<...>() call.
-        _mMicaController.AddSystemBackdropTarget(((MainWindow)(Application.Current as App)?.m_window)
+        m_micaController.AddSystemBackdropTarget(((MainWindow)(Application.Current as App).m_window)
             .As<ICompositionSupportsSystemBackdrop>());
-        _mMicaController.SetSystemBackdropConfiguration(_mConfigurationSource);
+        m_micaController.SetSystemBackdropConfiguration(m_configurationSource);
         return true; // succeeded
     }
 
@@ -90,25 +92,25 @@ public static class UIHelper
         switch (((FrameworkElement)MainWindow.Content).ActualTheme)
         {
             case ElementTheme.Dark:
-                _mConfigurationSource.Theme = SystemBackdropTheme.Dark;
+                m_configurationSource.Theme = SystemBackdropTheme.Dark;
                 break;
             case ElementTheme.Light:
-                _mConfigurationSource.Theme = SystemBackdropTheme.Light;
+                m_configurationSource.Theme = SystemBackdropTheme.Light;
                 break;
             case ElementTheme.Default:
-                _mConfigurationSource.Theme = SystemBackdropTheme.Default;
+                m_configurationSource.Theme = SystemBackdropTheme.Default;
                 break;
         }
     }
 
     private static void Window_ThemeChanged(FrameworkElement sender, object args)
     {
-        if (_mConfigurationSource != null) SetConfigurationSourceTheme();
+        if (m_configurationSource != null) SetConfigurationSourceTheme();
     }
 
     private static void Window_Activated(object sender, WindowActivatedEventArgs args)
     {
-        _mConfigurationSource.IsInputActive = args.WindowActivationState != WindowActivationState.Deactivated;
+        m_configurationSource.IsInputActive = args.WindowActivationState != WindowActivationState.Deactivated;
     }
 
     public static void SetTitleBarTransparent()
@@ -119,24 +121,24 @@ public static class UIHelper
 
         // 须获取MainWindow句柄和ActiveWindow句柄实例，详见文末备注。
         var activeWindow = GetActiveWindow();
-        if (MainWindowHandle == activeWindow)
+        if (MainWindow_Handle == activeWindow)
         {
-            SendMessage(MainWindowHandle, WmActivate, WaInactive, IntPtr.Zero);
-            SendMessage(MainWindowHandle, WmActivate, WaActive, IntPtr.Zero);
+            SendMessage(MainWindow_Handle, WM_ACTIVATE, WA_INACTIVE, IntPtr.Zero);
+            SendMessage(MainWindow_Handle, WM_ACTIVATE, WA_ACTIVE, IntPtr.Zero);
         }
         else
         {
-            SendMessage(MainWindowHandle, WmActivate, WaActive, IntPtr.Zero);
-            SendMessage(MainWindowHandle, WmActivate, WaInactive, IntPtr.Zero);
+            SendMessage(MainWindow_Handle, WM_ACTIVATE, WA_ACTIVE, IntPtr.Zero);
+            SendMessage(MainWindow_Handle, WM_ACTIVATE, WA_INACTIVE, IntPtr.Zero);
         }
     }
 
-    private enum MonitorDpiType
+    private enum Monitor_DPI_Type
     {
-        MdtEffectiveDpi = 0,
-        MdtAngularDpi = 1,
-        MdtRawDpi = 2,
-        MdtDefault = MdtEffectiveDpi
+        MDT_Effective_DPI = 0,
+        MDT_Angular_DPI = 1,
+        MDT_Raw_DPI = 2,
+        MDT_Default = MDT_Effective_DPI
     }
 }
 

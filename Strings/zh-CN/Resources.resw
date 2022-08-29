@@ -159,18 +159,6 @@
   <data name="TitleTextBlock.Text" xml:space="preserve">
     <value>AutoDL</value>
   </data>
-  <data name="TrayIconExitApplicationCommand.Description" xml:space="preserve">
-    <value>退出</value>
-  </data>
-  <data name="TrayIconExitApplicationCommand.Label" xml:space="preserve">
-    <value>退出</value>
-  </data>
-  <data name="TrayIconShowHideWindowCommand.Description" xml:space="preserve">
-    <value>显示/隐藏窗口</value>
-  </data>
-  <data name="TrayIconShowHideWindowCommand.Label" xml:space="preserve">
-    <value>显示/隐藏窗口</value>
-  </data>
   <data name="UseCustomWallpaperSwitcher.Header" xml:space="preserve">
     <value>壁纸切换自动化</value>
   </data>
