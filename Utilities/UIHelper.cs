@@ -20,14 +20,14 @@ public static class UIHelper
     private static SystemBackdropConfiguration _mConfigurationSource;
     private static readonly double Scale = GetScaleAdjustment();
 
-    public static IntPtr MainWindowHandle = WindowNative.GetWindowHandle(MainWindow);
+    public static IntPtr SettingsWindowHandle => WindowNative.GetWindowHandle(SettingsWindow);
 
-    public static WindowId MainWindowId = Win32Interop.GetWindowIdFromWindow(MainWindowHandle);
+    public static WindowId SettingsWindowId => Win32Interop.GetWindowIdFromWindow(SettingsWindowHandle);
 
-    public static MainWindow MainWindow => (MainWindow)(Application.Current as App).m_window;
+    public static SettingsWindow SettingsWindow => (SettingsWindow)(Application.Current as App).SettingsWindow;
 
     public static AppWindow AppWindow =>
-        AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(WindowNative.GetWindowHandle(MainWindow)));
+        AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(WindowNative.GetWindowHandle(SettingsWindow)));
 
     public static App App => Application.Current as App;
 
@@ -44,7 +44,7 @@ public static class UIHelper
     private static double GetScaleAdjustment()
     {
         var displayArea = DisplayArea.GetFromWindowId(
-            Win32Interop.GetWindowIdFromWindow(WindowNative.GetWindowHandle(MainWindow)), DisplayAreaFallback.Primary);
+            Win32Interop.GetWindowIdFromWindow(WindowNative.GetWindowHandle(SettingsWindow)), DisplayAreaFallback.Primary);
         var hMonitor = Win32Interop.GetMonitorFromDisplayId(displayArea.DisplayId);
 
         // Get DPI.
@@ -68,8 +68,8 @@ public static class UIHelper
 
         // Hooking up the policy object
         _mConfigurationSource = new SystemBackdropConfiguration();
-        MainWindow.Activated += Window_Activated;
-        ((FrameworkElement)MainWindow.Content).ActualThemeChanged += Window_ThemeChanged;
+        SettingsWindow.Activated += Window_Activated;
+        ((FrameworkElement)SettingsWindow.Content).ActualThemeChanged += Window_ThemeChanged;
 
         // Initial configuration state.
         _mConfigurationSource.IsInputActive = true;
@@ -87,7 +87,7 @@ public static class UIHelper
 
     private static void SetConfigurationSourceTheme()
     {
-        switch (((FrameworkElement)MainWindow.Content).ActualTheme)
+        switch (((FrameworkElement)SettingsWindow.Content).ActualTheme)
         {
             case ElementTheme.Dark:
                 _mConfigurationSource.Theme = SystemBackdropTheme.Dark;
@@ -119,15 +119,15 @@ public static class UIHelper
 
         // 须获取MainWindow句柄和ActiveWindow句柄实例，详见文末备注。
         var activeWindow = GetActiveWindow();
-        if (MainWindowHandle == activeWindow)
+        if (SettingsWindowHandle == activeWindow)
         {
-            SendMessage(MainWindowHandle, WmActivate, WaInactive, IntPtr.Zero);
-            SendMessage(MainWindowHandle, WmActivate, WaActive, IntPtr.Zero);
+            SendMessage(SettingsWindowHandle, WmActivate, WaInactive, IntPtr.Zero);
+            SendMessage(SettingsWindowHandle, WmActivate, WaActive, IntPtr.Zero);
         }
         else
         {
-            SendMessage(MainWindowHandle, WmActivate, WaActive, IntPtr.Zero);
-            SendMessage(MainWindowHandle, WmActivate, WaInactive, IntPtr.Zero);
+            SendMessage(SettingsWindowHandle, WmActivate, WaActive, IntPtr.Zero);
+            SendMessage(SettingsWindowHandle, WmActivate, WaInactive, IntPtr.Zero);
         }
     }
 

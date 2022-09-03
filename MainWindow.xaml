@@ -48,24 +48,6 @@
                 <MenuFlyoutItem Command="{StaticResource ExitApplicationCommand}"/>
             </MenuFlyout>
         </Grid.Resources>
-        <NavigationView x:Name="NavigationView" IsBackButtonVisible="Collapsed" PaneDisplayMode="Top"
-                        ItemInvoked="NavigationView_OnItemInvoked" IsSettingsVisible="False">
-            <NavigationView.MenuItems>
-                <NavigationViewItem x:Name="ThemeAutomationNavigationViewItem" Tag="ThemeAutomationPage"
-                                    x:Uid="ThemeAutomationNavigationViewItem">
-                    <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF354;" />
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-                <NavigationViewItem x:Name="WallpaperAutomationNavigationViewItem" Tag="WallpaperAutomationPage"
-                                    x:Uid="WallpaperAutomationNavigationViewItem">
-                    <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF246;" />
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-            </NavigationView.MenuItems>
-            <Frame x:Name="ContentFrame" />
-        </NavigationView>
         <tb:TaskbarIcon
             x:Name="TrayIcon"
             ToolTipText="AutoDL"

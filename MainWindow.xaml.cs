@@ -15,27 +15,12 @@ namespace AutoDL;
 /// </summary>
 public sealed partial class MainWindow : Window
 {
-    private readonly List<(string Tag, Type Page)> _pages = new()
-    {
-        ("ThemeAutomationPage", typeof(ThemeAutomationPage)),
-        ("WallpaperAutomationPage", typeof(WallpaperAutomationPage))
-    };
 
     public MainWindow()
     {
         InitializeComponent();
         _ = DayTimeCalculation._locator;
-        Title = "AutoDL";
-        NavigationView.SelectedItem = ThemeAutomationNavigationViewItem;
-        ContentFrame.Navigate(typeof(ThemeAutomationPage));
         Closed += (_, _) => { TrayIcon.Dispose(); };
-    }
-
-    private void NavigationView_OnItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
-    {
-        var item = _pages.FirstOrDefault(p => p.Tag.Equals(args.InvokedItemContainer.Tag.ToString()));
-        if (ContentFrame.CurrentSourcePageType != item.Page)
-            ContentFrame.Navigate(item.Page, null, args.RecommendedNavigationTransitionInfo);
     }
 
     private void ExitApplicationCommand_OnExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args)
@@ -45,7 +30,7 @@ public sealed partial class MainWindow : Window
 
     private void ShowHideWindowCommand_OnExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args)
     {
-        var window = UIHelper.MainWindow;
+        var window = UIHelper.SettingsWindow;
         if (window == null)
         {
             return;

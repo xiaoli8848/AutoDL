@@ -44,7 +44,7 @@
                               HorizontalAlignment="Stretch" BorderBrush="{ThemeResource SettingItemBorderBrush}"
                               BorderThickness="0.5" Content="{TemplateBinding ExpanderSettingContent}">
                         <Expander.Header>
-                            <Grid Height="70" Background="{ThemeResource SystemControlForegroundAltHighBrush}">
+                            <Grid Height="70" Background="{ThemeResource SystemControlForegroundAccentBrush}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition />

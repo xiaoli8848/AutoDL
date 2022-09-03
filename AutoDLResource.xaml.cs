@@ -21,7 +21,7 @@ public sealed partial class AutoDLResource : ResourceDictionary
 
     private async void AddImageWallpaper_OnExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args)
     {
-        var result = await ImportImageWallpaperDialog.ImportImageWallpaperAsync(UIHelper.MainWindow.Content.XamlRoot);
+        var result = await ImportImageWallpaperDialog.ImportImageWallpaperAsync(UIHelper.SettingsWindow.Content.XamlRoot);
         if (result is not null) Settings.Wallpapers.Add(result);
     }
 
@@ -29,7 +29,7 @@ public sealed partial class AutoDLResource : ResourceDictionary
         ExecuteRequestedEventArgs args)
     {
         var result =
-            await ImportWallpaperEngineWallpaperDialog.ImportWallpaperEngineWallpaperAsync(UIHelper.MainWindow.Content
+            await ImportWallpaperEngineWallpaperDialog.ImportWallpaperEngineWallpaperAsync(UIHelper.SettingsWindow.Content
                 .XamlRoot);
         if (result is not null) Settings.Wallpapers.Add(result);
     }

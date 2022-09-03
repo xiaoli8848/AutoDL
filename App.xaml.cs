@@ -1,5 +1,6 @@
 ﻿using AutoDL.Models;
 using AutoDL.Utilities;
+using H.NotifyIcon;
 using Windows.Graphics;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -14,6 +15,7 @@ public partial class App : Application
 {
     public readonly SettingsViewModel Settings = new();
     public Window m_window;
+    public Window SettingsWindow;
 
     /// <summary>
     ///     Initializes the singleton application object.  This is the first line of authored code
@@ -33,9 +35,9 @@ public partial class App : Application
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
         m_window = new MainWindow();
-        UIHelper.TrySetMicaBackdrop();
-        UIHelper.AppWindow.Resize(new SizeInt32(UIHelper.GetActualPixel(750), UIHelper.GetActualPixel(800)));
+        SettingsWindow = new SettingsWindow();
         UIHelper.AppWindow.Title = "AutoDL";
         m_window.Activate();
+        m_window.Hide(false);
     }
 }
