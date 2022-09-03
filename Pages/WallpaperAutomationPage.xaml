@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:AutoDL.Controls"
     xmlns:models="using:AutoDL.Models"
+    d:DataContext="{d:DesignInstance Type=models:SettingsViewModel}"
     mc:Ignorable="d">
 
     <Grid x:Name="MainGrid">
